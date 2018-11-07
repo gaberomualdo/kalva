@@ -1,0 +1,13 @@
+footer {
+  height: 5rem;
+  padding: 1rem;
+  border-bottom: none;
+  border-top: 1.5px solid #ECEEF1;
+}
+p {
+  display: block;
+  width: 100%;
+  text-align: center;
+  height: 100%;
+  line-height: calc(3rem - 1px);
+}
