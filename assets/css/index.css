@@ -1,0 +1,32 @@
+ul.articles a {
+  display: block;
+  clear: both;
+  margin-bottom: 2.5rem;
+  color: #222;
+  text-decoration: none;
+  padding: 2.5rem;
+  width: 100%;
+  border: 2px solid #ECEEF1;
+  box-sizing: border-box;
+}
+ul.articles a:hover {
+  border-color: #222;
+}
+ul.articles a h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  letter-spacing: -.05rem;
+  margin-bottom: 1.75rem;
+  line-height: 1.5;
+}
+ul.articles a p {
+  margin-bottom: 0;
+  text-align: left;
+}
+ul.articles a p.meta {
+  margin-top: 1.5rem;
+  color: #8d8e90;
+}
+ul.articles a p.meta strong {
+  color: #767778;
+}

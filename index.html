@@ -19,11 +19,14 @@ var latestNews = [];
   xhttp.send();
   function go(){
     latestNews.forEach(function(newsArticle, newsIndex){
+      if(!newsArticle.description){
+        newsArticle.description = "";
+      }
       document.querySelector("div.site_container ul.articles").innerHTML += `
       <a href="${newsArticle.url}" target="_blank">
         <h1>${newsArticle.title}</h1>
         <p>${newsArticle.description}</p>
-        <p>By ${newsArticle.source.name} on ${formatDate(new Date(newsArticle.publishedAt))}</p>
+        <p class='meta'>By <strong>${newsArticle.source.name}</strong> on ${formatDate(new Date(newsArticle.publishedAt))}</p>
       </a>
       `;
     });
@@ -33,7 +36,5 @@ var latestNews = [];
 </script>
 
 <ul class="articles">
-  <a>
-    <h1></h1>
-  </a>
+
 </ul>

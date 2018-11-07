@@ -11,5 +11,5 @@ function formatDate(date) {
   var monthIndex = date.getMonth();
   var year = date.getFullYear();
 
-  return monthNames[monthIndex] + ' ' + day + ' ' + year;
+  return monthNames[monthIndex] + ' ' + day + ', ' + year;
 }
