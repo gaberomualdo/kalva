@@ -47,6 +47,7 @@ nav input[type=text]:focus::placeholder {
     border-color: transparent;
     background-size: 2.5rem;
     cursor: pointer;
+    color: transparent;
   }
   nav input[type=text]:hover {
     opacity: 1;
