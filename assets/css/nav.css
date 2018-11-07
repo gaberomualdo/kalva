@@ -16,18 +16,20 @@ nav input[type=text] {
   padding: 0 1.25rem;
   display: block;
   float: right;
-  border: 1px solid #cfd4db;
-  opacity: 0.75;
+  border: 1px solid #5e5f60;
+  opacity: 0.25;
   width: 30rem;
   padding-left: 4rem;
-  --white-overlay: rgba(255,255,255,0.5);
-  background-image: linear-gradient(var(--white-overlay), var(--white-overlay)), url("../img/search.png");
+  background-image: url("../img/search.png");
   background-size: 2rem;
   background-position: 1rem center;
   background-repeat: no-repeat;
 }
+nav input[type=text]::placeholder {
+  color: #000;
+  opacity: 1;
+}
 nav input[type=text]:focus {
-  --white-overlay: transparent;
   opacity: 1;
   border: 1px solid #222;
 }
