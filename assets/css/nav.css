@@ -1,4 +1,7 @@
-nav input[type=text] {
+nav {
+  position: relative;
+}
+nav input[type=text], nav input[type=text]:focus {
   height: 100%;
   font-size: 1.5rem;
   line-height: calc(4.5rem - 3.5px);
@@ -9,7 +12,7 @@ nav input[type=text] {
   padding: 0 1.25rem;
   display: block;
   float: right;
-  border: 1px solid #5e5f60;
+  border: 2px solid rgb(197, 203, 212);
   opacity: 0.325;
   width: 30rem;
   padding-left: 4rem;
@@ -24,10 +27,33 @@ nav input[type=text]::placeholder {
 }
 nav input[type=text]:focus {
   opacity: 1;
-  border: 1px solid #222;
+  border: 2px solid #222;
 }
 nav input[type=text]:focus::placeholder {
   color: transparent;
+}
+@media (max-width: 775px) {
+  nav input[type=text], nav input[type=text]:focus {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    height: calc(4.5rem - 1px);
+    width: calc(100% - 3rem);
+    cursor: text;
+  }
+  nav input[type=text] {
+    width: calc(4.5rem - 1px);
+    padding: 0;
+    border-color: transparent;
+    background-size: 2.5rem;
+    cursor: pointer;
+  }
+  nav input[type=text]:hover {
+    opacity: 1;
+  }
+  nav input[type=text]::placeholder {
+    color: transparent;
+  }
 }
 nav .logo {
   height: 100%;

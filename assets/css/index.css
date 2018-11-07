@@ -9,6 +9,14 @@ ul.articles a {
   border: 2px solid #ECEEF1;
   box-sizing: border-box;
 }
+ul.articles a:last-child {
+  margin-bottom: 0;
+}
+@media (max-width: 775px) {
+  ul.articles a {
+    margin-bottom: 1.5rem;
+  }
+}
 ul.articles a:hover {
   border-color: #222;
 }
