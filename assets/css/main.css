@@ -1,5 +1,5 @@
-* {
-  font-family: "Avenir";
+body, input, button {
+  font-family: "Noto Sans KR", "Avenir";
 }
 
 @font-face {

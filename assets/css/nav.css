@@ -10,7 +10,7 @@ nav input[type=text] {
   display: block;
   float: right;
   border: 1px solid #5e5f60;
-  opacity: 0.25;
+  opacity: 0.325;
   width: 30rem;
   padding-left: 4rem;
   background-image: url("../img/search.png");
