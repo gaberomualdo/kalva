@@ -19,14 +19,24 @@ var latestNews = [];
   xhttp.send();
   function go(){
     latestNews.forEach(function(newsArticle, newsIndex){
+      var image = "";
+      var no_image_class = "";
       if(!newsArticle.description){
         newsArticle.description = "";
       }
+      if(newsArticle.urlToImage){
+        image = "<img src='" + newsArticle.urlToImage + "' onerror='this.parentElement.classList.add(\"no_image\");this.outerHTML=\"\";'>";
+      }else{
+        no_image_class = "no_image";
+      }
       document.querySelector("div.site_container ul.articles").innerHTML += `
-      <a href="${newsArticle.url}" target="_blank">
-        <h1>${newsArticle.title}</h1>
-        <p>${newsArticle.description}</p>
-        <p class='meta'>By <strong>${newsArticle.source.name}</strong> on ${formatDate(new Date(newsArticle.publishedAt))}</p>
+      <a href="${newsArticle.url}" target="_blank" class="${no_image_class}">
+        <div class='content'>
+          <h1>${newsArticle.title}</h1>
+          <p>${newsArticle.description}</p>
+          <p class='meta'>By <strong>${newsArticle.source.name}</strong> on ${formatDate(new Date(newsArticle.publishedAt))}</p>
+        </div>
+        ${image}
       </a>
       `;
     });

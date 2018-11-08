@@ -1,3 +1,6 @@
+ul.articles {
+  margin-bottom: 0;
+}
 ul.articles a {
   display: block;
   clear: both;
@@ -8,6 +11,7 @@ ul.articles a {
   width: 100%;
   border: 2px solid #ECEEF1;
   box-sizing: border-box;
+  overflow: auto;
 }
 ul.articles a:last-child {
   margin-bottom: 0;
@@ -16,6 +20,23 @@ ul.articles a:last-child {
   ul.articles a {
     margin-bottom: 1.5rem;
   }
+}
+ul.articles a div.content {
+  width: 60%;
+  display: block;
+  float: left;
+  box-sizing: border-box;
+  padding-right: 2.5rem;
+}
+ul.articles a.no_image div.content {
+  width: 100%;
+  padding: 0;
+}
+ul.articles a img {
+  width: 40%;
+  height: auto;
+  display: block;
+  float: left;
 }
 ul.articles a:hover {
   border-color: #222;
