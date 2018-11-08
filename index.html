@@ -47,7 +47,7 @@ function updateSourceArticles(){
   document.querySelector("div.misc_area div.select_box select").blur();
   var source = document.querySelector("div.misc_area div.select_box select").value;
   document.querySelector("ul.articles").innerHTML = "";
-  requestAPI("https://newsapi.org/v2/top-headlines?country=us&sources=" + source + "&apiKey=377facbb80c140388ec9cdb16a7f7ee0", function(response){
+  requestAPI("https://newsapi.org/v2/top-headlines?sources=" + source + "&apiKey=377facbb80c140388ec9cdb16a7f7ee0", function(response){
     console.log(JSON.parse(response));
     JSON.parse(response).articles.forEach(function(newsArticle, newsIndex){
       addArticle(newsArticle);
@@ -136,9 +136,16 @@ function updateTopicArticles(){
 </ul>
 
 <script>
+
 (function(){
   const possibleTabs = ["top","source","topic"];
   document.querySelector("ul.sections a:nth-child(" + (possibleTabs.indexOf(getQueryVariable("p")) + 1) + ")").classList.add("active");
 })();
+
+document.querySelector("nav input").onkeydown = function(e){
+  if(e.keyCode == 13) {
+    
+  }
+}
 
 </script>
