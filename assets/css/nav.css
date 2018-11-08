@@ -1,5 +1,7 @@
 nav {
-  position: relative;
+  position: sticky;
+  background-color: #fff;
+  top: 0;
 }
 nav input[type=text], nav input[type=text]:focus {
   height: 100%;

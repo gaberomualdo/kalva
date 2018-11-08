@@ -1,3 +1,27 @@
+ul.sections {
+  margin-bottom: 2.5rem;
+  display: block;
+  height: 5rem;
+}
+ul.sections a {
+  display: block;
+  float: left;
+  height: 5rem;
+  width: auto;
+  box-sizing: border-box;
+  font-size: 2rem;
+  color: #222;
+  text-decoration: none;
+  font-weight: bold;
+  line-height: calc(5rem - 4px);
+  padding: 0 1.25rem;
+  margin-right: 1.5rem;
+  border: 2px solid #ECEEF1;
+}
+ul.sections a.active {
+  border-color: #222;
+}
+
 ul.articles {
   margin-bottom: 0;
 }
@@ -13,12 +37,13 @@ ul.articles a {
   box-sizing: border-box;
   overflow: auto;
   outline: none;
+  cursor: pointer;
 }
 ul.articles a:last-child {
   margin-bottom: 0;
 }
 @media (max-width: 775px) {
-  ul.articles a {
+  ul.articles a, ul.sections {
     margin-bottom: 1.5rem;
   }
 }
