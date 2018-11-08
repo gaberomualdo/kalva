@@ -31,4 +31,7 @@ div.site_container {
   nav, footer, div.site_container {
     padding: 1.5rem;
   }
+  :root {
+    font-size: 8.5px;
+  }
 }

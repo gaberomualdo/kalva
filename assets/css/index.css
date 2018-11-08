@@ -12,6 +12,7 @@ ul.articles a {
   border: 2px solid #ECEEF1;
   box-sizing: border-box;
   overflow: auto;
+  outline: none;
 }
 ul.articles a:last-child {
   margin-bottom: 0;
@@ -36,7 +37,19 @@ ul.articles a img {
   width: 40%;
   height: auto;
   display: block;
-  float: left;
+  float: right;
+}
+@media (max-width: 775px) {
+  ul.articles a div.content {
+    width: 100%;
+    clear: both;
+    padding: 0;
+  }
+  ul.articles a img {
+    padding-bottom: 2.5rem;
+    width: 100%;
+    float: left;
+  }
 }
 ul.articles a:hover {
   border-color: #222;

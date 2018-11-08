@@ -7,6 +7,31 @@ stylesheet: "index"
 
 var latestNews = [];
 
+function addArticle(newsArticle){
+  var image = "";
+  var has_image_style = "";
+  var no_image_class = "";
+  if(!newsArticle.description){
+    newsArticle.description = "";
+  }
+  if(newsArticle.urlToImage){
+    has_image_style = "display: none;";
+    image = "<img src='" + newsArticle.urlToImage + "' onload='this.parentElement.removeAttribute(\"style\");' onerror='this.parentElement.classList.add(\"no_image\");this.parentElement.removeAttribute(\"style\");this.outerHTML=\"\";'>";
+  }else{
+    no_image_class = "no_image";
+  }
+  document.querySelector("div.site_container ul.articles").innerHTML += `
+  <a href="${newsArticle.url}" target="_blank" class="${no_image_class}" style='${has_image_style}'>
+    ${image}
+    <div class='content'>
+      <h1>${newsArticle.title}</h1>
+      <p>${newsArticle.description}</p>
+      <p class='meta'>By <strong>${newsArticle.source.name}</strong> on ${formatDate(new Date(newsArticle.publishedAt))}</p>
+    </div>
+  </a>
+  `;
+}
+
 (function(){
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
@@ -19,26 +44,7 @@ var latestNews = [];
   xhttp.send();
   function go(){
     latestNews.forEach(function(newsArticle, newsIndex){
-      var image = "";
-      var no_image_class = "";
-      if(!newsArticle.description){
-        newsArticle.description = "";
-      }
-      if(newsArticle.urlToImage){
-        image = "<img src='" + newsArticle.urlToImage + "' onerror='this.parentElement.classList.add(\"no_image\");this.outerHTML=\"\";'>";
-      }else{
-        no_image_class = "no_image";
-      }
-      document.querySelector("div.site_container ul.articles").innerHTML += `
-      <a href="${newsArticle.url}" target="_blank" class="${no_image_class}">
-        <div class='content'>
-          <h1>${newsArticle.title}</h1>
-          <p>${newsArticle.description}</p>
-          <p class='meta'>By <strong>${newsArticle.source.name}</strong> on ${formatDate(new Date(newsArticle.publishedAt))}</p>
-        </div>
-        ${image}
-      </a>
-      `;
+      addArticle(newsArticle);
     });
   }
 })();
