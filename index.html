@@ -47,7 +47,20 @@ function updateSourceArticles(){
   document.querySelector("div.misc_area div.select_box select").blur();
   var source = document.querySelector("div.misc_area div.select_box select").value;
   document.querySelector("ul.articles").innerHTML = "";
-  requestAPI("https://newsapi.org/v2/top-headlines?sources=" + source + "&apiKey=377facbb80c140388ec9cdb16a7f7ee0", function(response){
+  requestAPI("https://newsapi.org/v2/top-headlines?country=us&sources=" + source + "&apiKey=377facbb80c140388ec9cdb16a7f7ee0", function(response){
+    console.log(JSON.parse(response));
+    JSON.parse(response).articles.forEach(function(newsArticle, newsIndex){
+      addArticle(newsArticle);
+    });
+  });
+}
+
+function updateTopicArticles(){
+  document.querySelector("div.misc_area div.select_box select").blur();
+  var topic = document.querySelector("div.misc_area div.select_box select").value;
+  document.querySelector("ul.articles").innerHTML = "";
+  requestAPI("https://newsapi.org/v2/top-headlines?country=us&category=" + topic + "&apiKey=377facbb80c140388ec9cdb16a7f7ee0", function(response){
+    console.log(JSON.parse(response));
     JSON.parse(response).articles.forEach(function(newsArticle, newsIndex){
       addArticle(newsArticle);
     });
@@ -59,9 +72,7 @@ function updateSourceArticles(){
   if(possibleTabs.indexOf(getQueryVariable("p")) == -1){
     window.open("?p=top","_self");
   }
-  window.onload = function(){
-    document.querySelector("ul.sections a:nth-child(" + (possibleTabs.indexOf(getQueryVariable("p")) + 1) + ")").classList.add("active");
-  }
+
   if(possibleTabs.indexOf(getQueryVariable("p")) == 0){
     requestAPI("https://newsapi.org/v2/top-headlines?country=us&apiKey=377facbb80c140388ec9cdb16a7f7ee0", function(response){
       JSON.parse(response).articles.forEach(function(newsArticle, newsIndex){
@@ -85,7 +96,26 @@ function updateSourceArticles(){
       updateSourceArticles();
     });
   }else if(possibleTabs.indexOf(getQueryVariable("p")) == 2){
-
+    window.onload = function(){
+      var selectOptions = "";
+      ["entertainment", "general", "health", "science", "sports", "technology"].forEach(function(option){
+        var optionUpper = option;
+        optionUpper = optionUpper.split("");
+        optionUpper.shift();
+        optionUpper = optionUpper.join("");
+        optionUpper = option[0].toUpperCase() + optionUpper;
+        selectOptions += "<option value='" + option + "'>" + optionUpper + "</option>";
+      });
+      document.querySelector("div.misc_area").innerHTML += `
+      <div class="select_box">
+        <p>Topic: </p>
+        <select onchange='updateTopicArticles();'>
+          ${selectOptions}
+        </select>
+      </div>
+      `;
+      updateTopicArticles();
+    }
   }
 })();
 
@@ -104,3 +134,11 @@ function updateSourceArticles(){
 <ul class="articles">
 
 </ul>
+
+<script>
+(function(){
+  const possibleTabs = ["top","source","topic"];
+  document.querySelector("ul.sections a:nth-child(" + (possibleTabs.indexOf(getQueryVariable("p")) + 1) + ")").classList.add("active");
+})();
+
+</script>
