@@ -5,8 +5,6 @@ stylesheet: "index"
 ---
 <script>
 
-var latestNews = [];
-
 function addArticle(newsArticle){
   var image = "";
   var has_image_style = "";
@@ -45,9 +43,16 @@ function requestAPI(url, func){
   xhttp.send();
 }
 
-requestAPI("https://newsapi.org/v2/sources?language=en&apiKey=377facbb80c140388ec9cdb16a7f7ee0", function(response){
-  console.log(JSON.parse(response));
-});
+function updateSourceArticles(){
+  document.querySelector("div.misc_area div.select_box select").blur();
+  var source = document.querySelector("div.misc_area div.select_box select").value;
+  document.querySelector("ul.articles").innerHTML = "";
+  requestAPI("https://newsapi.org/v2/top-headlines?sources=" + source + "&apiKey=377facbb80c140388ec9cdb16a7f7ee0", function(response){
+    JSON.parse(response).articles.forEach(function(newsArticle, newsIndex){
+      addArticle(newsArticle);
+    });
+  });
+}
 
 (function(){
   const possibleTabs = ["top","source","topic"];
@@ -59,13 +64,26 @@ requestAPI("https://newsapi.org/v2/sources?language=en&apiKey=377facbb80c140388e
   }
   if(possibleTabs.indexOf(getQueryVariable("p")) == 0){
     requestAPI("https://newsapi.org/v2/top-headlines?country=us&apiKey=377facbb80c140388ec9cdb16a7f7ee0", function(response){
-      latestNews = JSON.parse(response).articles;
-      latestNews.forEach(function(newsArticle, newsIndex){
+      JSON.parse(response).articles.forEach(function(newsArticle, newsIndex){
         addArticle(newsArticle);
       });
     });
   }else if(possibleTabs.indexOf(getQueryVariable("p")) == 1){
-
+    requestAPI("https://newsapi.org/v2/sources?language=en&apiKey=377facbb80c140388ec9cdb16a7f7ee0", function(response){
+      var selectOptions = "";
+      JSON.parse(response).sources.forEach(function(source){
+        selectOptions += "<option value='" + source.id + "'>" + source.name + "</option>";
+      });
+      document.querySelector("div.misc_area").innerHTML += `
+      <div class="select_box">
+        <p>Source: </p>
+        <select onchange='updateSourceArticles();'>
+          ${selectOptions}
+        </select>
+      </div>
+      `;
+      updateSourceArticles();
+    });
   }else if(possibleTabs.indexOf(getQueryVariable("p")) == 2){
 
   }
@@ -78,6 +96,10 @@ requestAPI("https://newsapi.org/v2/sources?language=en&apiKey=377facbb80c140388e
   <a href="?p=source">News By Source</a>
   <a href="?p=topic">News By Topic</a>
 </ul>
+
+<div class="misc_area">
+
+</div>
 
 <ul class="articles">
 

@@ -3,7 +3,7 @@ footer {
   border-bottom: none;
   border-top: 1.5px solid #ECEEF1;
 }
-p {
+footer p {
   display: block;
   width: 100%;
   text-align: center;

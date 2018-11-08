@@ -3,7 +3,7 @@ ul.sections {
   display: block;
   height: 5rem;
 }
-ul.sections a {
+ul.sections a, div.misc_area select {
   display: block;
   float: left;
   height: 5rem;
@@ -17,13 +17,37 @@ ul.sections a {
   padding: 0 1.25rem;
   margin-right: 1.5rem;
   border: 2px solid #ECEEF1;
+  border-radius: 0;
 }
-ul.sections a.active {
+ul.sections a.active, div.misc_area select:focus {
   border-color: #222;
 }
 
 ul.articles {
   margin-bottom: 0;
+}
+div.misc_area div.select_box {
+  height: 3.5rem;
+  text-align: left;
+  margin-bottom: 2.5rem;
+}
+div.misc_area div.select_box p {
+  text-align: left;
+  float: left;
+  font-size: 2.5rem;
+  line-height: 3.5rem;
+  font-weight: bold;
+  margin: 0;
+  height: 3.5rem;
+}
+div.misc_area div.select_box select {
+  display: block;
+  float: left;
+  height: 3.5rem;
+  font-size: 2rem;
+  margin: 0;
+  margin-top: 2px;
+  margin-left: 1.5rem;
 }
 ul.articles a {
   display: block;
@@ -43,7 +67,7 @@ ul.articles a:last-child {
   margin-bottom: 0;
 }
 @media (max-width: 775px) {
-  ul.articles a, ul.sections {
+  ul.articles a, ul.sections, ul.articles div.select_box {
     margin-bottom: 1.5rem;
   }
 }
