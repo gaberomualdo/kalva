@@ -5,7 +5,7 @@ stylesheet: "index"
 ---
 <script>
 
-function addArticle(newsArticle){
+function addArticle(newsArticle,search){
   var image = "";
   var has_image_style = "";
   var no_image_class = "";
@@ -18,7 +18,11 @@ function addArticle(newsArticle){
   }else{
     no_image_class = "no_image";
   }
-  document.querySelector("div.site_container ul.articles").innerHTML += `
+  var className = "articles";
+  if(search){
+    className = "search";
+  }
+  document.querySelector("div.site_container ul." + className).innerHTML += `
   <a onclick="openArticle('${newsArticle.url}')" target="_blank" class="${no_image_class}" style='${has_image_style}'>
     ${image}
     <div class='content'>
@@ -47,7 +51,7 @@ function updateSourceArticles(){
   document.querySelector("div.misc_area div.select_box select").blur();
   var source = document.querySelector("div.misc_area div.select_box select").value;
   document.querySelector("ul.articles").innerHTML = "";
-  requestAPI("https://newsapi.org/v2/top-headlines?sources=" + source + "&apiKey=377facbb80c140388ec9cdb16a7f7ee0", function(response){
+  requestAPI("https://newsapi.org/v2/everything?pageSize=100&sources=" + source + "&apiKey=377facbb80c140388ec9cdb16a7f7ee0", function(response){
     console.log(JSON.parse(response));
     JSON.parse(response).articles.forEach(function(newsArticle, newsIndex){
       addArticle(newsArticle);
@@ -59,7 +63,7 @@ function updateTopicArticles(){
   document.querySelector("div.misc_area div.select_box select").blur();
   var topic = document.querySelector("div.misc_area div.select_box select").value;
   document.querySelector("ul.articles").innerHTML = "";
-  requestAPI("https://newsapi.org/v2/top-headlines?country=us&category=" + topic + "&apiKey=377facbb80c140388ec9cdb16a7f7ee0", function(response){
+  requestAPI("https://newsapi.org/v2/top-headlines?pageSize=100&country=us&category=" + topic + "&apiKey=377facbb80c140388ec9cdb16a7f7ee0", function(response){
     console.log(JSON.parse(response));
     JSON.parse(response).articles.forEach(function(newsArticle, newsIndex){
       addArticle(newsArticle);
@@ -74,7 +78,7 @@ function updateTopicArticles(){
   }
 
   if(possibleTabs.indexOf(getQueryVariable("p")) == 0){
-    requestAPI("https://newsapi.org/v2/top-headlines?country=us&apiKey=377facbb80c140388ec9cdb16a7f7ee0", function(response){
+    requestAPI("https://newsapi.org/v2/top-headlines?country=us&pageSize=100&apiKey=377facbb80c140388ec9cdb16a7f7ee0", function(response){
       JSON.parse(response).articles.forEach(function(newsArticle, newsIndex){
         addArticle(newsArticle);
       });
@@ -134,6 +138,9 @@ function updateTopicArticles(){
 <ul class="articles">
 
 </ul>
+<ul class="search">
+
+</ul>
 
 <script>
 
@@ -144,7 +151,25 @@ function updateTopicArticles(){
 
 document.querySelector("nav input").onkeydown = function(e){
   if(e.keyCode == 13) {
-    
+    if(window.innerWidth > 775) {
+      this.blur();
+    }
+    document.querySelector("ul.articles").setAttribute("style","display: none;");
+    document.querySelector(".misc_area").setAttribute("style","display: none;");
+    document.querySelector("ul.sections").setAttribute("style","display: none;");
+    document.querySelector("div.site_container ul.search").innerHTML = `
+      <button onclick='document.querySelector(\".misc_area\").removeAttribute(\"style\");document.querySelector(\"ul.articles\").removeAttribute(\"style\");document.querySelector(\"ul.sections\").removeAttribute(\"style\");document.querySelector(\"nav input\").value = \"\";this.parentElement.innerHTML = \"\";'>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M13.025 1l-2.847 2.828 6.176 6.176h-16.354v3.992h16.354l-6.176 6.176 2.847 2.828 10.975-11z"/></svg>
+      </button>
+    `;
+    requestAPI("https://newsapi.org/v2/everything?language=en&pageSize=100&q=" + encodeURIComponent(this.value) + "&apiKey=377facbb80c140388ec9cdb16a7f7ee0", function(response){
+      JSON.parse(response).articles.forEach(function(newsArticle, newsIndex){
+        addArticle(newsArticle, true);
+      });
+      if(JSON.parse(response).articles.length == 0){
+        document.querySelector("div.site_container ul.search").innerHTML += "<p class='no_results'>No Articles Found</p>"
+      }
+    });
   }
 }
 

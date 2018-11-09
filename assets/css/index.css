@@ -25,7 +25,7 @@ ul.sections a.active, div.misc_area select:focus {
   border-color: #222;
 }
 
-ul.articles {
+ul.articles, ul.search {
   margin-bottom: 0;
 }
 div.misc_area div.select_box {
@@ -51,7 +51,7 @@ div.misc_area div.select_box select {
   margin-top: 2px;
   margin-left: 1.5rem;
 }
-ul.articles a {
+ul.articles a, ul.search a {
   display: block;
   clear: both;
   margin-bottom: 2.5rem;
@@ -65,61 +65,89 @@ ul.articles a {
   outline: none;
   cursor: pointer;
 }
-ul.articles a:last-child {
+ul.articles a:last-child, ul.search a:last-child {
   margin-bottom: 0;
 }
 @media (max-width: 775px) {
-  ul.articles a, ul.sections a, ul.articles div.select_box {
+  ul.articles a, ul.search a, ul.sections a, ul.articles div.select_box {
     margin-bottom: 1.5rem;
   }
 }
-ul.articles a div.content {
+ul.articles a div.content, ul.search a div.content {
   width: 60%;
   display: block;
   float: left;
   box-sizing: border-box;
   padding-right: 2.5rem;
 }
-ul.articles a.no_image div.content {
+ul.articles a.no_image div.content, ul.search a.no_image div.content {
   width: 100%;
   padding: 0;
 }
-ul.articles a img {
+ul.articles a img, ul.search a img {
   width: 40%;
   height: auto;
   display: block;
   float: right;
 }
 @media (max-width: 775px) {
-  ul.articles a div.content {
+  ul.articles a div.content, ul.search a div.content {
     width: 100%;
     clear: both;
     padding: 0;
   }
-  ul.articles a img {
+  ul.articles a img, ul.search a img {
     padding-bottom: 2.5rem;
     width: 100%;
     float: left;
   }
 }
-ul.articles a:hover {
+ul.articles a:hover, ul.search a:hover {
   border-color: #222;
 }
-ul.articles a h1 {
+ul.articles a h1, ul.search a h1 {
   font-size: 2.5rem;
   font-weight: bold;
   letter-spacing: -.05rem;
   margin-bottom: 1.75rem;
   line-height: 1.5;
 }
-ul.articles a p {
+ul.articles a p, ul.search a p {
   margin-bottom: 0;
   text-align: left;
 }
-ul.articles a p.meta {
+ul.articles a p.meta, ul.search a p.meta {
   margin-top: 1.5rem;
   color: #8d8e90;
 }
-ul.articles a p.meta strong {
+ul.articles a p.meta strong, ul.search a p.meta strong {
   color: #767778;
+}
+
+ul.search button {
+  border: none;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 2.5rem;
+  fill: #222;
+  opacity: 0.325;
+  border: 2px solid rgb(197, 203, 212);
+  transform: scale(-1, 1);
+  border-radius: 0;
+  width: 4.5rem;
+  height: 4.5rem;
+  box-sizing: border-box;
+  padding: 1rem;
+  position: relative;
+  z-index: 1;
+}
+ul.search button svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  float: left;
+}
+ul.search button:hover {
+  opacity: 1;
+  border-color: #222;
 }
