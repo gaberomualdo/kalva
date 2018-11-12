@@ -29,7 +29,8 @@ ul.articles, ul.search {
   margin-bottom: 0;
 }
 div.misc_area div.select_box {
-  height: 3.5rem;
+  overflow: auto;
+  min-height: 3.5rem;
   text-align: left;
   margin-bottom: 2.5rem;
 }
